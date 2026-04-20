@@ -59,6 +59,9 @@ class StaffController extends Controller
         if($request->has('status') && $request->get('status')!=""){
             $record->where('status',$request->get('status'));
         }
+        if($request->has('role_type') && $request->get('role_type')!=""){
+            $record->where('role_type',$request->get('role_type'));
+        }
         return Datatables::of($record)
            ->editColumn('status',function($record) {
             if($record->status==0){

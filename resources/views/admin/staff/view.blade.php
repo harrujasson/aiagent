@@ -39,7 +39,7 @@
                             @endif
                         </div>
                         <h5 class="font-size-15 text-truncate">{{$r->name.' '.$r->last_name}}</h5>
-                        <p class="text-muted mb-0 text-truncate">{{roleName($r->role)}}</p>
+                        <p class="text-muted mb-0 text-truncate">{{roleName($r->role)}} - {{$r->role_type}}</p>
                     </div>
 
                     <div class="col-sm-8">

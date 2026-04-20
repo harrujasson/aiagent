@@ -155,12 +155,8 @@ function roleName($role=0){
             return "Super Admin";
             break;
         case 2:
-            return "Vendor";
+            return "Staff";
             break;
-        case 3:
-            return "Customer";
-            break;
-        default:
         return "Invalid";
     }
 }

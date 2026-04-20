@@ -137,6 +137,21 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-3">
+                                        <label>Role Type <code>*</code></label>
+                                        <div class="input-group status-field">
+                                            <div class="input-group-text"><i class="isax isax-user"></i></div>
+                                            <select class="form-control" name="role_type" required>
+                                                <option value="Admin">Admin</option>
+                                                <option value="Accountant">Accountant</option>
+                                                <option value="Manager">Manager</option>
+                                                <option value="Staff">Staff</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
                                         <label>Status </label>
                                         <div class="input-group status-field">
                                             <div class="input-group-text"><i class="isax isax-receipt-edit"></i></div>

@@ -32,6 +32,7 @@
                             <th>Image</th>
                             <th>First Name</th>
                             <th>Last Name</th>
+                            <th>Role</th>
                             <th>E-mail</th>
                             <th>Telephone</th>
                             <th>Register Date</th>
@@ -49,14 +50,28 @@
 <div class="table_heading">
     <h2 >{{$title}}</h2>
 
-    <div class="top-filter mt-1 col-3">
-        <label>Status Wise</label>
-        <div class="input-group" >
-            <select class="form-control" id="statusinfo">
-                <option value="">All</option>
-                <option value="1">Active</option>
-                <option value="0">In-Active</option>
-            </select>
+    <div class="row">
+        <div class="top-filter mt-1 col-3">
+            <label>Status Wise</label>
+            <div class="input-group" >
+                <select class="form-control" id="statusinfo">
+                    <option value="">All</option>
+                    <option value="1">Active</option>
+                    <option value="0">In-Active</option>
+                </select>
+            </div>
+        </div>
+        <div class="top-filter mt-1 col-3">
+            <label>Role Wise</label>
+            <div class="input-group" >
+                <select class="form-control" id="roleinfo">
+                    <option value="">All</option>
+                    <option value="Admin">Admin</option>
+                    <option value="Accountant">Accountant</option>
+                    <option value="Manager">Manager</option>
+                    <option value="Staff">Staff</option>
+                </select>
+            </div>
         </div>
     </div>
 </div>
@@ -85,7 +100,8 @@
             ajax: {
                 url:'{!! route('admin.staff.showAjaxList') !!}',
                 data:function(d){
-                    d.status = $('#statusinfo').val()
+                    d.status = $('#statusinfo').val(),
+                    d.role_type = $('#roleinfo').val()
                 }
             },
             columns: [
@@ -93,6 +109,7 @@
                 { data: 'picture', name: 'picture', orderable: false, searchable: false },
                 { data: 'name', name: 'name'},
                 { data: 'last_name', name: 'last_name'},
+                { data: 'role_type', name: 'role_type'},
                 { data: 'email', name: 'email' },
                 { data: 'phone', name: 'phone' },
                 { data: 'created_at', name: 'created_at' },
@@ -103,9 +120,10 @@
         $("#staff").addClass("mm-active");
         $(".table_heading").appendTo("#datatable-inline_wrapper .row:first-child > .col-md-6:first-child");
         $(".table_add_btn").appendTo("#datatable-inline_wrapper .row:first-child > .col-md-6:last-child .dataTables_filter");
-        $("body").on("change","#statusinfo",function(){
+        $("body").on("change","#statusinfo, #roleinfo ",function(){
             $('#datatable-inline').DataTable().draw();
         });
+
     });
 </script>
 
