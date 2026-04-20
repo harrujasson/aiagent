@@ -141,10 +141,10 @@
                                         <div class="input-group status-field">
                                             <div class="input-group-text"><i class="isax isax-user"></i></div>
                                             <select class="form-control" name="role_type" required>
-                                                <option value="Admin">Admin</option>
-                                                <option value="Accountant">Accountant</option>
-                                                <option value="Manager">Manager</option>
-                                                <option value="Staff">Staff</option>
+                                                <option value="Admin" {{($r->role_type == "Admin" ? "selected":"")}}>Admin</option>
+                                                <option value="Accountant" {{($r->role_type == "Accountant" ? "selected":"")}}>Accountant</option>
+                                                <option value="Manager" {{($r->role_type == "Manager" ? "selected":"")}}>Manager</option>
+                                                <option value="Staff" {{($r->role_type == "Staff" ? "selected":"")}}>Staff</option>
                                             </select>
                                         </div>
 
