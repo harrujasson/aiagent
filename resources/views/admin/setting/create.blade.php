@@ -58,6 +58,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label>Company Address</label>
@@ -94,7 +95,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row ">
                                 <div class="col-sm-6">
                                     <div class="mt-3">
                                         <label for="formFileFeatureSize" class="form-label">Logo Large
@@ -111,6 +112,8 @@
                                     </div>
                                     @endif
                                 </div>
+                            </div>
+                            <div class="row d-none">
                                 <div class="col-sm-6">
                                     <div class="mt-3">
                                         <label for="formFileFeatureSize" class="form-label">Logo Small
@@ -145,6 +148,8 @@
                                     </div>
                                     @endif
                                 </div>
+                            </div>
+                            <div class="row d-none">
                                 <div class="col-sm-4">
                                     <div class="mt-3">
                                         <label for="formFileFeatureSize" class="form-label">Login Page Logo
@@ -161,6 +166,8 @@
                                     </div>
                                     @endif
                                 </div>
+                            </div>
+                            <div class="row d-none">
                                 <div class="col-sm-4">
                                     <div class="mt-3">
                                         <label for="formFileFeatureSize" class="form-label">Email Logo

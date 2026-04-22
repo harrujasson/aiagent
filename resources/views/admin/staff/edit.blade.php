@@ -85,17 +85,26 @@
 
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label  class="form-label">Telephone <code>*</code></label>
+                                        <label  class="form-label">Telephone </label>
                                         <div class="input-group">
                                             <div class="input-group-text"><i class="isax isax-call-calling"></i></div>
-                                            <input type="text" class="form-control" name="phone" required value="{{ old('phone', $r->phone) }}" maxlength="10">
+                                            <input type="text" class="form-control" name="phone" value="{{ old('phone', $r->phone) }}" maxlength="10">
                                         </div> 
                                         
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div class="row d-none">
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label>Address </label>
+                                        <div class="input-group">
+                                            <div class="input-group-text"><i class="isax isax-location"></i></div>
+                                            <input type="text" class="form-control" id="autocomplete" name="address" value="{{ old('address') }}">
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-md-3">
                                     <div class="mb-3">
                                         <label  class="form-label">City</label>
