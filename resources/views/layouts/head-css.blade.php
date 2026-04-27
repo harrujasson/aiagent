@@ -8,7 +8,7 @@
 <link href="{{ URL::asset('build/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ URL::asset('build/css/tabler-icons.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ URL::asset('build/css/iconsax-style.css') }}" rel="stylesheet" type="text/css" />
-
+<link href="{{ URL::asset('build/libs/select2/select2.min.css') }}" rel="stylesheet" type="text/css" />
 <!-- App Css-->
 <link href="{{ URL::asset('build/css/app.min.css') }}"  rel="stylesheet" type="text/css" />
 <link  href="{{ URL::asset('build/css/custom.css') }}"  rel="stylesheet" type="text/css">
