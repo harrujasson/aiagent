@@ -31,7 +31,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('task_id');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('comment_for_user_id')->nullable()->after('user_id');
+            $table->unsignedBigInteger('comment_for_user_id')->nullable();
             $table->text('comment');
             $table->timestamps();
         });
