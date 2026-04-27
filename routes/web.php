@@ -24,7 +24,7 @@ Route::get('/home', function () {
 Auth::routes();
 Route::post('login-process',['as'=>"loginsave",'uses'=>"App\Http\Controllers\Auth\LoginController@login"]);
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.','middleware'=>['auth','admin']], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.','middleware'=>['auth','admin_manager']], function () {
     Route::get('dashboard', ['as'=>'dashboard', 'uses'=>'App\Http\Controllers\Admin\HomeController@dashboard']);
     Route::get('my-porfile', ['as'=>'home', 'uses'=>'App\Http\Controllers\Admin\HomeController@profile']);
     Route::get('my-porfile', ['as'=>'profile', 'uses'=>'App\Http\Controllers\Admin\HomeController@profile']);
@@ -32,7 +32,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.','middleware'=>['auth','admin
     Route::post('my-porfile-save', ['as'=>'my_profile_save', 'uses'=>'App\Http\Controllers\Admin\HomeController@profile_update']);
 
     /*Vendors*/
-    Route::group(['prefix'=>'staff','as'=>'staff.','middleware'=>['admin']],function(){
+    Route::group(['prefix'=>'staff','as'=>'staff.','middleware'=>['admin_manager']],function(){
         Route::get('create',['as'=>'new_user','uses'=>'App\Http\Controllers\Admin\StaffController@create']);
         Route::post('create',['as'=>'new_save','uses'=>'App\Http\Controllers\Admin\StaffController@store']);
         Route::get('manage',['as'=>'manage','uses'=>'App\Http\Controllers\Admin\StaffController@show']);
@@ -43,8 +43,21 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.','middleware'=>['auth','admin
         Route::get('delete/{id}',['as'=>'delete','uses'=>'App\Http\Controllers\Admin\StaffController@delete']);
     });
 
+    Route::group(['prefix'=>'task','as'=>'task.','middleware'=>['admin_manager']],function(){
+        Route::get('create',['as'=>'new','uses'=>'App\Http\Controllers\Admin\TaskController@create']);
+        Route::post('create',['as'=>'new_save','uses'=>'App\Http\Controllers\Admin\TaskController@store']);
+        Route::get('manage',['as'=>'manage','uses'=>'App\Http\Controllers\Admin\TaskController@show']);
+        Route::get('getAjaxList',['as'=>'showAjaxList','uses'=>'App\Http\Controllers\Admin\TaskController@showList']);
+        Route::get('edit/{id}',['as'=>'edit','uses'=>'App\Http\Controllers\Admin\TaskController@edit']);
+        Route::post('edit/{id}',['as'=>'edit_save','uses'=>'App\Http\Controllers\Admin\TaskController@update']);
+        Route::get('view/{id}',['as'=>'view','uses'=>'App\Http\Controllers\Admin\TaskController@view']);
+        Route::post('comment/{id}/staff/{staffId}',['as'=>'comment_staff_save','uses'=>'App\Http\Controllers\Admin\TaskController@addCommentForStaff']);
+        Route::get('delete/{id}',['as'=>'delete','uses'=>'App\Http\Controllers\Admin\TaskController@delete']);
+        Route::post('status/{id}',['as'=>'status_update','uses'=>'App\Http\Controllers\Admin\TaskController@updateStatus']);
+    });
+
     /*Users*/
-    Route::group(['prefix'=>'customer','as'=>'customer.','middleware'=>['admin']],function(){
+    Route::group(['prefix'=>'customer','as'=>'customer.','middleware'=>['admin_manager']],function(){
         Route::get('manage',['as'=>'manage','uses'=>'App\Http\Controllers\Admin\CustomerController@show']);
         Route::get('getAjaxList',['as'=>'showAjaxList','uses'=>'App\Http\Controllers\Admin\CustomerController@showList']);
         Route::get('edit/{id}',['as'=>'edit','uses'=>'App\Http\Controllers\Admin\CustomerController@edit']);
@@ -124,6 +137,12 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.','middleware'=>['auth','staff
     Route::post('my-porfile-save', ['as'=>'my_profile_save', 'uses'=>'App\Http\Controllers\Staff\HomeController@profile_update']);
 
     Route::get('profile-edit', ['as'=>'profile-edit', 'uses'=>'App\Http\Controllers\Staff\HomeController@profile_edit']);
+
+    Route::group(['prefix'=>'task','as'=>'task.'],function(){
+        Route::get('manage',['as'=>'manage','uses'=>'App\Http\Controllers\Staff\TaskController@show']);
+        Route::get('view/{id}',['as'=>'view','uses'=>'App\Http\Controllers\Staff\TaskController@view']);
+        Route::post('comment/{id}',['as'=>'comment_save','uses'=>'App\Http\Controllers\Staff\TaskController@addComment']);
+    });
 
 
 });

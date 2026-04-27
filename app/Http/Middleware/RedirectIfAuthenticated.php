@@ -24,9 +24,12 @@ class RedirectIfAuthenticated
                 if(Auth::user()->role == "1"){
                     return redirect(route('admin.dashboard'));
                 }else if(Auth::user()->role == "2"){
-                    return redirect(route('vendor.dashboard'));
+                    if(strtolower((string) Auth::user()->role_type) === 'manager'){
+                        return redirect(route('admin.task.manage'));
+                    }
+                    return redirect(route('staff.dashboard'));
                 }else if(Auth::user()->role == "3"){
-                    return redirect(route('customer.dashboard'));
+                   // return redirect(route('customer.dashboard'));
                 }
             }
         }
