@@ -66,7 +66,7 @@
 
                     <div class="mb-3">
                         <label>Assign Staff <code>*</code></label>
-                        <select class="form-control" name="assigned_staff[]" multiple required>
+                        <select class="select2 form-control select2-multiple" name="assigned_staff[]" multiple="multiple" required>
                             @foreach($staffUsers as $staff)
                                 <option value="{{$staff->id}}" {{ in_array($staff->id, old('assigned_staff', $assignedStaffIds)) ? 'selected' : '' }}>
                                     {{$staff->name}} {{$staff->last_name}} ({{$staff->email}})
@@ -88,6 +88,8 @@
 
 @section('script')
 <script type="text/javascript">
+    $(".select2").select2();
+    
     $(document).ready(function() {
         $("#task").addClass("mm-active");
     });
