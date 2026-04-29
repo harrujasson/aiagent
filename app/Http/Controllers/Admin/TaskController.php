@@ -118,13 +118,52 @@ class TaskController extends Controller
                 return '<span class="badge badge-soft-success">' . $status . '</span>';
             })
             ->editColumn('assigned_staff', function ($task) {
-                $names = [];
-                foreach ($task->assignments as $assignment) {
-                    if (!empty($assignment->user) && !empty($assignment->user->name)) {
-                        $names[] = $assignment->user->name;
+                $html = '<div class="avatar-group">';
+
+                if (!empty($task->assignments) && count($task->assignments) > 0) {
+                    foreach ($task->assignments as $assignment) {
+                        if (!empty($assignment->user) && !empty($assignment->user->name)) {
+                            $user = $assignment->user;
+                            $name = $user->name;
+
+                            if (!empty($user->picture)) {
+                                $image = asset('uploads/profile/' . $user->picture);
+
+                                $html .= '
+                                    <a href="javascript:void(0);" 
+                                    class="avatar-group-item"
+                                    data-bs-toggle="tooltip" 
+                                    data-bs-placement="top" 
+                                    data-bs-title="' . e($name) . '">
+                                        <img src="' . $image . '" 
+                                            alt="' . e($name) . '" 
+                                            class="rounded-circle avatar-xs">
+                                    </a>';
+                            } else {
+                                $firstLetter = strtoupper(substr($name, 0, 1));
+
+                                $html .= '
+                                    <a href="javascript:void(0);" 
+                                    class="avatar-group-item"
+                                    data-bs-toggle="tooltip" 
+                                    data-bs-placement="top" 
+                                    data-bs-title="' . e($name) . '">
+                                        <div class="avatar-xs">
+                                            <span class="avatar-title rounded-circle">
+                                                ' . $firstLetter . '
+                                            </span>
+                                        </div>
+                                    </a>';
+                            }
+                        }
                     }
+                } else {
+                    $html .= '<span>N/A</span>';
                 }
-                return !empty($names) ? implode(', ', $names) : 'N/A';
+
+                $html .= '</div>';
+
+                return $html;
             })
             ->editColumn('created_at', function ($task) {
                 return date("Y-m-d", strtotime($task->created_at));
@@ -135,7 +174,7 @@ class TaskController extends Controller
                 $actions .= '<a href="javascript:void(0);" data-url="' . route('admin.task.delete', $task->id) . '" class="on-default sa-warning"><i class="ti ti-trash"></i></a>';
                 return $actions;
             })
-            ->rawColumns(['status', 'actions'])
+            ->rawColumns(['assigned_staff','status', 'actions'])
             ->make(true);
     }
 

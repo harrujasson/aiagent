@@ -141,6 +141,7 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.','middleware'=>['auth','staff
     Route::group(['prefix'=>'task','as'=>'task.'],function(){
         Route::get('manage',['as'=>'manage','uses'=>'App\Http\Controllers\Staff\TaskController@show']);
         Route::get('view/{id}',['as'=>'view','uses'=>'App\Http\Controllers\Staff\TaskController@view']);
+        Route::get('getAjaxList',['as'=>'showAjaxList','uses'=>'App\Http\Controllers\Staff\TaskController@showList']);
         Route::post('comment/{id}',['as'=>'comment_save','uses'=>'App\Http\Controllers\Staff\TaskController@addComment']);
     });
 
