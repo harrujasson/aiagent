@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Staff;
 
 use App\Http\Controllers\Controller;
 use App\Models\Task;
+use App\Models\User;
 use App\Models\TaskAssignment;
 use App\Models\TaskComment;
+use Yajra\DataTables\Facades\DataTables;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -51,6 +53,32 @@ class TaskController extends Controller
             ->get();
 
         return view('staff.task.view', $content);
+    }
+
+    public function showList(Request $request)
+    {
+        $record = Task::whereHas('assignments', function ($q) {
+            $q->where('user_id', Auth::id());
+        });
+
+        if ($request->has('status') && $request->get('status') != "") {
+            $record->where('status', $request->get('status'));
+        }
+
+        return Datatables::of($record)
+            ->editColumn('status', function ($record) {
+                return ucwords(str_replace('_', ' ', $record->status));
+            })
+            ->editColumn('created_at', function ($record) {
+                return date("Y-m-d", strtotime($record->created_at));
+            })
+            ->addColumn('actions', function ($record) {
+                return '<a href="' . route('staff.task.view', $record->id) . '" class="btn btn-sm btn-info">
+                            View
+                        </a>';
+            })
+            ->rawColumns(['actions'])
+            ->make(true);
     }
 
     public function addComment(Request $request, $id)

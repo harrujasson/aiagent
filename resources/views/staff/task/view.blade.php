@@ -8,7 +8,55 @@
 @slot('title') {{$title}} @endslot
 @slot('page_title') {{$task->title}} @endslot
 @endcomponent
+@section('css')
+<style>
+    /* Comment box styling for long comments */
+    .comment-box {
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        padding: 15px;
+        margin-bottom: 15px;
+        background: #fff;
+    }
 
+    .comment-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: #0d6efd;
+        margin-bottom: 4px;
+    }
+
+    .comment-date {
+        font-size: 12px;
+        color: #6c757d;
+        margin-bottom: 10px;
+    }
+
+    .comment-text {
+        font-size: 15px;
+        line-height: 1.7;
+        color: #212529;
+
+        /* Perfect handling for long text */
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
+        max-height: 200px;      /* fixed height */
+        overflow-y: auto;       /* vertical scroll if too long */
+        padding-right: 5px;
+    }
+
+    /* Optional better scrollbar */
+    .comment-text::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .comment-text::-webkit-scrollbar-thumb {
+        background: #c1c1c1;
+        border-radius: 10px;
+    }
+</style>
+@endsection
 <div class="row">
     <div class="col-lg-7">
         <div class="card">
@@ -62,13 +110,15 @@
 
                 <hr>
                 @forelse($comments as $comment)
+                <div class="comment-box">
                     <div class="border rounded p-2 mb-2">
-                        <small class="badge bg-light text-dark mb-1">
+                       <div class="comment-title"> <small class="badge bg-light text-dark mb-1">
                             {{$comment->user_id == auth()->id() ? 'My Comment' : 'Admin Comment'}}
-                        </small>
-                        <small class="text-muted d-block mb-1">{{date('d M, Y h:i A', strtotime($comment->created_at))}}</small>
-                        <p class="mb-0">{{$comment->comment}}</p>
+                        </small></div>
+                         <div class="comment-date"><small class="text-muted d-block mb-1">{{date('d M, Y h:i A', strtotime($comment->created_at))}}</small></div>
+                        <div class="comment-text"><p class="mb-0">{{$comment->comment}}</p></div>
                     </div>
+                     </div>
                 @empty
                     <p class="mb-0 text-muted">No comments yet.</p>
                 @endforelse

@@ -71,7 +71,7 @@
                 </div>
                 <div class="card-footer d-flex justify-content-between">
                     <a href="{{route('admin.task.manage')}}" class="btn btn-secondary">Back</a>
-                    <button class="btn btn-primary">Save Task</button>
+                    <button class="btn btn-primary">Create Task</button>
                 </div>
             </form>
         </div>

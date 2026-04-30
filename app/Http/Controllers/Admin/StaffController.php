@@ -134,8 +134,9 @@ class StaffController extends Controller
                     )
             );
 
-            $request->session()->flash('success', 'Staff has been created');
-            return redirect()->back();
+                $request->session()->flash('success', 'Staff has been created');
+                return redirect()->route('admin.staff.manage');
+
         }else{
             $request->session()->flash('error', 'Error!');
             return redirect()->back();
@@ -168,7 +169,7 @@ class StaffController extends Controller
                     )
             );
             $request->session()->flash('success', 'Staff has updated successfully!');
-            return redirect()->back();
+            return redirect()->route('admin.staff.manage');
         }else{
             $request->session()->flash('error', 'Error!');
             return redirect()->back();
