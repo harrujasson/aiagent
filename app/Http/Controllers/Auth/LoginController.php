@@ -73,6 +73,8 @@ class LoginController extends Controller
            }
             if(Auth::user()->role=='1'){
                 return redirect(route('admin.dashboard'));
+            }else if(Auth::user()->role=='2' && strtolower((string) Auth::user()->role_type) === 'manager'){
+                return redirect(route('admin.task.manage'));
             }else if(Auth::user()->role=='2'){
                 return redirect(route('staff.dashboard'));
             }

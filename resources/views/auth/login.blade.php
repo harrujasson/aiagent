@@ -5,6 +5,7 @@
 @endsection
 
 @section('css')
+
 @endsection
 @section('body')
     <body class="auth-body-bg">

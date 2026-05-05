@@ -42,7 +42,7 @@
                                 <label>First Name <code>*</code></label>
                                 <div class="input-group">
                                     <div class="input-group-text"><i class="isax isax-user"></i></div>
-                                    <input type="text" class="form-control" name="name" required value="{{ old('name') }}">
+                                    <input type="text" class="form-control" name="name" required value="{{ old('name') }}" maxlength="10">
                                 </div>
                                 <span class="text-danger">{{ $errors->first('name', ':message') }}</span>
                             </div>
@@ -52,7 +52,7 @@
                                 <label for="formrow-password-input" class="form-label">Last Name</label>
                                 <div class="input-group">
                                     <div class="input-group-text"><i class="isax isax-user"></i></div>
-                                    <input type="text" class="form-control" name="last_name" value="{{ old('last_name') }}"  >
+                                    <input type="text" class="form-control" name="last_name" value="{{ old('last_name') }}" maxlength="10">
                                 </div>
 
                             </div>
@@ -164,26 +164,54 @@
                         </div>
                     </div>
 
-                
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label>New Password </label>
+                                <label>New Password</label>
                                 <div class="input-group">
-                                    <div class="input-group-text"><i class="isax isax-lock-1"></i></div>
-                                    <input type="password" class="form-control" name="password" required >
-                                </div>                                    
-                                <span class="text-danger">{{ $errors->first('password', ':message') }}</span>
+                                    <div class="input-group-text">
+                                        <i class="isax isax-lock-1"></i>
+                                    </div>
+                                    <input                                        type="password" name="password" id="userpassword" class="form-control @error('password') is-invalid @enderror" placeholder="Enter password"
+                                    >
+                                    <button class="btn btn-light toggle-password"
+                                        type="button" data-target="userpassword" >
+                                        <i class="mdi mdi-eye-outline"></i>
+                                    </button>
+                                </div>
+                                <span class="text-danger">
+                                    {{ $errors->first('password', ':message') }}
+                                </span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label>Confirm New Password </label>
+                                <label>Confirm New Password</label>
                                 <div class="input-group">
-                                    <div class="input-group-text"><i class="isax isax-lock-1"></i></div>
-                                    <input type="password" class="form-control" name="confirm_password" required >
+                                    <div class="input-group-text">
+                                        <i class="isax isax-lock-1"></i>
+                                    </div>
+
+                                    <input
+                                        type="password"
+                                        name="confirm_password"
+                                        id="confirm_password"
+                                        class="form-control @error('confirm_password') is-invalid @enderror"
+                                        placeholder="Confirm password"
+                                    >
+
+                                    <button
+                                        class="btn btn-light toggle-password"
+                                        type="button"
+                                        data-target="confirm_password"
+                                    >
+                                        <i class="mdi mdi-eye-outline"></i>
+                                    </button>
                                 </div>
-                                <span class="text-danger">{{ $errors->first('confirm_password', ':message') }}</span>
+
+                                <span class="text-danger">
+                                    {{ $errors->first('confirm_password', ':message') }}
+                                </span>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -200,7 +228,7 @@
                 <div class="card-footer">
                     <div class="d-flex space-between align-center">
                         <a href="{{route('admin.staff.manage')}}" class="btn btn-transparent btn-rounded"><i class="ti ti-arrow-left"></i> Back</a>
-                        <button class="btn btn-primary btn-rounded">Save Changes</button>
+                        <button class="btn btn-primary btn-rounded">Create Staff</button>
                     </div>
                     
                 </div>
@@ -216,6 +244,22 @@
 <script src="{{ URL::asset('build/libs/parsleyjs/parsleyjs.min.js') }}"></script>
 <script src="{{ URL::asset('build/js/pages/form-validation.init.js') }}"></script>
 <script type="text/javascript">
+
+    $(document).on("click", ".toggle-password", function () {
+        let target = $(this).data("target");
+        let input = $("#" + target);
+        let icon = $(this).find("i");
+
+        if (input.attr("type") === "password") {
+            input.attr("type", "text");
+            icon.removeClass("mdi-eye-outline")
+                .addClass("mdi-eye-off-outline");
+        } else {
+            input.attr("type", "password");
+            icon.removeClass("mdi-eye-off-outline")
+                .addClass("mdi-eye-outline");
+        }
+    });
     $(document).ready(function() {
         $("#staff").addClass("mm-active");
     });
@@ -249,6 +293,5 @@
     }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google.address_key') }}&libraries=places&callback=initAutocomplete" async defer></script>
-
 
 @endsection

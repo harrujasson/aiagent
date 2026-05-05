@@ -13,7 +13,7 @@ class StaffPermissions{
         
         if(Auth::check()){
             $user = Auth::user();
-            if($user->isStaff() ){
+            if($user->isStaff() && strtolower((string) $user->role_type) === 'staff'){
                 return $next($request);
             }
         }

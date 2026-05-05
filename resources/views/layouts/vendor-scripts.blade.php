@@ -4,7 +4,7 @@
 <script src="{{ URL::asset('build/libs/metismenu/metismenu.min.js')}}"></script>
 <script src="{{ URL::asset('build/libs/simplebar/simplebar.min.js')}}"></script>
 <script src="{{ URL::asset('build/libs/node-waves/node-waves.min.js')}}"></script>
-
+<script src="{{ URL::asset('build/libs/select2/select2.min.js') }}" ></script>
 @yield('script')
 
 <!-- App js -->
