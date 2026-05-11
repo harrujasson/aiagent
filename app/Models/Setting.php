@@ -17,6 +17,7 @@ class Setting extends Model
         'company_name',
         'company_address',
         'company_phone',
-        'company_email'
+        'company_email',
+        'company_prompt'
     ];
 }

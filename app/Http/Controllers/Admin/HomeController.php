@@ -42,6 +42,8 @@ class HomeController extends Controller
         $content['r'] = User::where('id',Auth::id())->first();
         return view('admin.profile',$content);
     }
+
+
     function profile_edit(){
 
         $content['name'] = 'My profile';
@@ -81,6 +83,5 @@ class HomeController extends Controller
             return redirect(route('admin.profile'));
         }
     }
-
 
 }

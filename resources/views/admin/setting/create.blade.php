@@ -15,7 +15,7 @@
 
 
 <div class="row">
-    <div class="col-xl-12 mx-auto">
+    <div class="col-xl-8 mx-auto">
         <div class="card">
             <div class="card-header">
                 <h5 class="card-title mb-0">{{$title}}</h5>
@@ -90,6 +90,19 @@
                                             <div class="input-group-text"><i class="isax isax-sms-tracking"></i></div>
                                             <input type="text" class="form-control" name="company_email"
                                                 value="{{old('company_email',$r->company_email ?? '')}}">
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label>AI Prompt</label>
+                                        <div class="input-group">
+                                            <div class="input-group-text"><i class="far fa-sticky-note"></i></div>
+                                            <textarea  class="form-control" name="company_prompt"
+                                                >{{old('company_prompt',$r->company_prompt ?? '')}}</textarea>
                                         </div>
 
                                     </div>
