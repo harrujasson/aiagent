@@ -33,6 +33,12 @@
                         <span key="t-dashboards">Tasks</span>
                     </a>
                 </li>
+                <li id="ai" class="">
+                    <a href="{{route('admin.report.show')}}" class="waves-effect">
+                        <i class="fab fa-react"></i>
+                        <span key="t-dashboards">AI Report</span>
+                    </a>
+                </li>
 
 
 
