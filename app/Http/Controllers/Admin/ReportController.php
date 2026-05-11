@@ -128,11 +128,23 @@ class ReportController extends Controller
             return ['error' => 'Failed to fetch sheet'];
         }
 
-        // CSV rows
-        $lines = preg_split("/\r\n|\n|\r/", $response->body());
-        $rows = array_map('str_getcsv', $lines);
-        $rows = array_filter($rows);
+         // Create temporary stream
+        $temp = fopen('php://temp', 'r+');
 
+        fwrite($temp, $response->body());
+
+        rewind($temp);
+
+        $rows = [];
+
+        // Proper CSV parsing
+        while (($data = fgetcsv($temp)) !== false) {
+
+            $rows[] = $data;
+
+        }
+
+        fclose($temp);
         if (empty($rows)) {
             return [];
         }
@@ -242,6 +254,381 @@ class ReportController extends Controller
     }
 
     public function generateReport($reportInstruction='Show report only for Ernie'){
+
+        $dataText = $this->filterdata;
+
+        $instruction = strtolower($reportInstruction);
+        $filteredData = $dataText;
+        // ONLY ERNIE
+        if (strpos($instruction, 'ernie') !== false) {
+            $filteredData = array_filter($dataText, function ($row) {
+                return strtolower(trim($row['event_type'])) != 'wedding';
+            });
+
+        }
+        // ONLY CRISTIAN
+        elseif (strpos($instruction, 'cristian') !== false) {
+            $filteredData = array_filter($dataText, function ($row) {
+                return strtolower(trim($row['event_type'])) == 'wedding';
+            });
+
+        }
+        $filteredData = array_values($filteredData);
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . env('OPENAI_API_KEY'),
+            'Content-Type' => 'application/json',
+        ])->post('https://api.openai.com/v1/chat/completions', [
+            'model' => 'gpt-4.1',
+            'messages' => [
+                [
+                    'role' => 'system',
+                    'content' => 'You are a senior AI event operations analyst.
+
+                    Your job is to generate executive-level operational reports from lead datasets.
+                    
+                    BUSINESS RULES:
+                    - Cristian handles ONLY Wedding events.
+                    - Ernie handles ALL non-Wedding events.
+                    - Use ONLY the event_type field for categorization.
+                    - Ignore misleading wording inside notes for primary categorization.
+                    - Notes may ONLY be used for deeper sub-category insights.
+
+                    CLASSIFICATION RULES:
+                    - Use event_type as the PRIMARY category.
+                    - NEVER override primary category using notes.
+                    - Use notes ONLY for:
+                    - sub-category enrichment
+                    - operational insights
+                    - event intent detection
+                    - grouping similar event purposes
+                    - Notes may ONLY be used for:
+                        - other events
+                        - subcategory grouping
+                        - operational insights
+                        - event intent analysis
+
+
+                    REPORT REQUIREMENTS:
+                    
+                    1. Generate separate sections for:
+                    - Cristian
+                    - Ernie
+                    
+                    2. Cristian section:
+                    - summarize Wedding consistency
+                    - include Wedding totals
+                    - include concise operational insight
+                    - summarize Wedding consistency
+                    - calculate total Wedding leads
+                    - provide concise operational insight
+                    - Show Total of all lead category
+                    
+                    3. Ernie section:
+                    - summarize broader event diversity
+                    - show top event categories with totals
+                    - calculate overall totals
+                    - calculate totals for ALL non-Wedding events
+                    - identify top event categories
+                    - calculate total Ernie leads
+                    - Show Total of all lead category
+                    
+                    4. Generate intelligent other events breakdowns for Ernie:
+                    Examples:
+                    - Social Celebrations
+                    - Life Events
+                    - Professional / Corporate
+                    - Private Gatherings
+                    - Unique / Edge Cases
+                    
+                    5. Analyze preferred dates:
+                    - identify busiest dates
+                    - identify repeated demand periods
+                    - identify seasonal trends
+                    - identify highest competition dates
+
+
+                    7. Generate "Other Event Type Breakdown"
+                    Using notes and event_type intelligently, group events into operational buckets such as:
+                    - Social Celebrations
+                    - Corporate / Professional
+                    - Family Gatherings
+                    - Religious / Life Events
+                    - Private Events
+                    - Unique / Specialty Requests
+
+                    8. Date Analysis
+                    Generate:
+                    - Seprate "Ernie Leads by Preferred Date"
+                    - Most Requested Dates
+                    - Highest Competition Dates
+                    - Secondary Demand Dates
+                    - Seasonal Demand Trends
+                    - All Other Dates summary
+
+                    9. DATE ANALYSIS RULES
+                    - Count repeated preferred dates
+                    - Dates with highest frequency should appear under "Most Requested Dates"
+                    - Dates appearing once should be summarized under "All Other Dates"
+                    - Identify concentrated demand periods
+
+                    10. COUNTING RULES
+                    - Calculate totals directly from dataset
+                    - Use exact counts whenever possible
+                    - Use approximate values only when categorization is uncertain
+                    
+                    STYLE RULES:
+                    - Use professional operational reporting tone
+                    - Use concise executive commentary
+                    - Add relevant emojis to ALL major headings
+                    - Add emojis to subsection headings where appropriate
+                    - Use structured readable formatting
+                    - Return CLEAN HTML ONLY
+                    - Do NOT use markdown
+                    - Do NOT use tables
+
+                    EMOJI EXAMPLES:
+                    📊 Report Summary
+                    👰 Cristian Lead Analysis
+                    🎉 Ernie Event Breakdown
+                    🔥 Most Requested Dates
+                    📈 Demand Trends
+                    🧠 Operational Insights
+                    👨‍👩‍👧 Private Gatherings
+                    💼 Corporate Events
+                    🎓 Life Events
+                    📅 Seasonal Demand
+
+                    
+                    ALLOWED HTML:
+                    <h2>
+                    <h3>
+                    <h4>
+                    <p>
+                    <ul>
+                    <li>
+                    <strong>
+                    <br>
+
+                    Also:
+                    - summarize most requested dates
+                    - identify busiest periods
+                    - calculate total leads per category
+                    
+                    IMPORTANT:
+                    - Use exact counts whenever possible
+                    - If grouping requires approximation, clearly indicate approximate counts
+                    - Keep insights operational and business-focused
+                    - Do not generate fictional data'
+                ],
+                [
+                    'role' => 'user',
+                    'content' =>  "User Request:{$reportInstruction}
+                    Lead Data:" . json_encode($filteredData)
+                ],
+            ],
+            'temperature' => 0,
+
+        ]);
+
+        $result = $response->json();
+
+        // API error handling
+        if (isset($result['error'])) {
+
+            return [
+                'success' => false,
+                'message' => $result['error']['message']
+            ];
+        }
+
+        return [
+            'success' => true,
+            'report' => $result['choices'][0]['message']['content'] ?? ''
+        ];
+    }
+    public function generateReportVer2($reportInstruction='Show report only for Ernie'){
+
+        $dataText = $this->filterdata;
+
+        $instruction = strtolower($reportInstruction);
+        $filteredData = $dataText;
+        // ONLY ERNIE
+        if (strpos($instruction, 'ernie') !== false) {
+            $filteredData = array_filter($dataText, function ($row) {
+                return strtolower(trim($row['event_type'])) != 'wedding';
+            });
+
+        }
+        // ONLY CRISTIAN
+        elseif (strpos($instruction, 'cristian') !== false) {
+            $filteredData = array_filter($dataText, function ($row) {
+                return strtolower(trim($row['event_type'])) == 'wedding';
+            });
+
+        }
+        $filteredData = array_values($filteredData);
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . env('OPENAI_API_KEY'),
+            'Content-Type' => 'application/json',
+        ])->post('https://api.openai.com/v1/chat/completions', [
+            'model' => 'gpt-4.1',
+            'messages' => [
+                [
+                    'role' => 'system',
+                    'content' => 'You are a senior AI event operations analyst.
+
+                    Your job is to generate executive-level operational reports from lead datasets.
+                    
+                    BUSINESS RULES:
+                    - Cristian handles ONLY Wedding events.
+                    - Ernie handles ALL non-Wedding events.
+                    - Use ONLY the event_type field for categorization.
+                    - Ignore misleading wording inside notes for primary categorization.
+                    - Notes may ONLY be used for deeper sub-category insights.
+
+                    CLASSIFICATION RULES:
+                    - Use event_type as the PRIMARY category.
+                    - NEVER override primary category using notes.
+                    - Use notes ONLY for:
+                    - sub-category enrichment
+                    - operational insights
+                    - event intent detection
+                    - grouping similar event purposes
+                    - Notes may ONLY be used for:
+                        - other events
+                        - subcategory grouping
+                        - operational insights
+                        - event intent analysis
+
+
+                    REPORT REQUIREMENTS:
+                    
+                    1. Generate separate sections for:
+                    - Cristian
+                    - Ernie
+                    
+                    2. Cristian section:
+                    - summarize Wedding consistency
+                    - include Wedding totals
+                    - include concise operational insight
+                    - summarize Wedding consistency
+                    - calculate total Wedding leads
+                    - provide concise operational insight
+                    - Show Total of all lead category
+                    
+                    3. Ernie section:
+                    - summarize broader event diversity
+                    - show top event categories with totals
+                    - calculate overall totals
+                    - calculate totals for ALL non-Wedding events
+                    - identify top event categories
+                    - calculate total Ernie leads
+                    - Show Total of all lead category
+                    
+                    4. Generate intelligent other events breakdowns for Ernie:
+                    Examples:
+                    - Social Celebrations
+                    - Life Events
+                    - Professional / Corporate
+                    - Private Gatherings
+                    - Unique / Edge Cases
+                    
+                    5. Analyze preferred dates:
+                    - identify busiest dates
+                    - identify repeated demand periods
+                    - identify seasonal trends
+                    - identify highest competition dates
+                    
+                    6. Generate concise operational insights:
+                    - consistency
+                    - demand concentration
+                    - event diversity
+                    - seasonality
+
+                    7. Generate "Other Event Type Breakdown"
+                    Using notes and event_type intelligently, group events into operational buckets such as:
+                    - Social Celebrations
+                    - Corporate / Professional
+                    - Family Gatherings
+                    - Religious / Life Events
+                    - Private Events
+                    - Unique / Specialty Requests
+
+                    8. Date Analysis
+                    Generate:
+                    - Most Requested Dates
+                    - Highest Competition Dates
+                    - Secondary Demand Dates
+                    - Seasonal Demand Trends
+                    - All Other Dates summary
+
+                    9. DATE ANALYSIS RULES
+                    - Count repeated preferred dates
+                    - Dates with highest frequency should appear under "Most Requested Dates"
+                    - Dates appearing once should be summarized under "All Other Dates"
+                    - Identify concentrated demand periods
+
+                    10. COUNTING RULES
+                    - Calculate totals directly from dataset
+                    - Use exact counts whenever possible
+                    - Use approximate values only when categorization is uncertain
+                    
+                    STYLE RULES:
+                    - Use professional operational reporting tone
+                    - Use concise executive commentary
+                    - Use structured readable formatting
+                    - Return CLEAN HTML ONLY
+                    - Do NOT use markdown
+                    - Do NOT use tables
+                    
+                    ALLOWED HTML:
+                    <h2>
+                    <h3>
+                    <h4>
+                    <p>
+                    <ul>
+                    <li>
+                    <strong>
+                    <br>
+
+                    Also:
+                    - summarize most requested dates
+                    - identify busiest periods
+                    - calculate total leads per category
+                    
+                    IMPORTANT:
+                    - Use exact counts whenever possible
+                    - If grouping requires approximation, clearly indicate approximate counts
+                    - Keep insights operational and business-focused
+                    - Do not generate fictional data'
+                ],
+                [
+                    'role' => 'user',
+                    'content' =>  "User Request:{$reportInstruction}
+                    Lead Data:" . json_encode($filteredData)
+                ],
+            ],
+            'temperature' => 0,
+
+        ]);
+
+        $result = $response->json();
+
+        // API error handling
+        if (isset($result['error'])) {
+
+            return [
+                'success' => false,
+                'message' => $result['error']['message']
+            ];
+        }
+
+        return [
+            'success' => true,
+            'report' => $result['choices'][0]['message']['content'] ?? ''
+        ];
+    }
+    public function generateReportVer1($reportInstruction='Show report only for Ernie'){
 
         $dataText = $this->filterdata;
 
