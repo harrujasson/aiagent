@@ -20,6 +20,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
 <script src="{{ URL::asset('/assets/front/js/init.js') }}"></script>
 <script src='{{asset("assets/front/js/jquery.star-rating-svg.js")}}'></script>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>lucide.createIcons();</script>
+
+
 <script>
     $(".rating").starRating({
         activeColor: '#FF7F50',          

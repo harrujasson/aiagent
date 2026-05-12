@@ -12,4 +12,6 @@
 <!-- App Css-->
 <link href="{{ URL::asset('build/css/app.min.css') }}"  rel="stylesheet" type="text/css" />
 <link  href="{{ URL::asset('build/css/custom.css') }}"  rel="stylesheet" type="text/css">
+
+<link  href="{{ URL::asset('build/css/vr-globals.css') }}"  rel="stylesheet" type="text/css">
 @yield('css')

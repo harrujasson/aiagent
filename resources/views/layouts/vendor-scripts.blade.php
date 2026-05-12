@@ -5,6 +5,8 @@
 <script src="{{ URL::asset('build/libs/simplebar/simplebar.min.js')}}"></script>
 <script src="{{ URL::asset('build/libs/node-waves/node-waves.min.js')}}"></script>
 <script src="{{ URL::asset('build/libs/select2/select2.min.js') }}" ></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>lucide.createIcons();</script>
 @yield('script')
 
 <!-- App js -->
