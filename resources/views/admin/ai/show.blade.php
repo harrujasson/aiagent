@@ -154,7 +154,7 @@
 
                 <div>
                     <div class="chat-conversation p-3">
-                        <ul class="list-unstyled mb-0 airesponse" data-simplebar style="min-height: 410px;">
+                        <ul class="list-unstyled mb-0" data-simplebar style="min-height: 410px;">
 
                         </ul>
                     </div>
@@ -188,70 +188,6 @@
 <script src="{{ asset('build/plugins/sweet-alert2/sweetalert2.min.js') }}"></script>
 <script src="{{ asset('build/plugins/sweet-alert2/jquery.sweet-alert2.init.js') }}"></script>
 <script src="{{ asset('build/libs/simplebar/simplebar.min.js') }}"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $("#ai").addClass("mm-active");
 
-        $(".send_query").click(function(){
-            var $this = $(this);
-            $this.text('Sending..')
-            let queryinput = $("#query_input");
-            if(queryinput.val() == ""){
-                alert('Error!', 'Please enter your query.', 'error');
-            }
-
-
-
-            let querySend=`<li class="right">
-                                <div class="conversation-list">
-                                    <div class="ctext-wrap">
-                                        <div class="conversation-name">Your Request</div>
-                                        <p>
-                                            <strong>${queryinput.val()}</strong>
-                                        </p>
-                                    </div>
-                                </div>
-                            </li>`;
-            $(".airesponse").append(querySend)
-
-            $.ajax({
-                method: 'POST',
-                data: {
-                    _token:$('meta[name="csrf-token"]').attr('content'),
-                    query:queryinput.val()
-                },
-                url:'/admin/report/query',
-                success:function(res){
-                    $this.text('Send')
-                    if(res.success){
-                        let html = `
-                        <li>
-                            <div class="conversation-list">
-                                <div class="ctext-wrap">
-                                    <div class="conversation-name">AI Agent Response</div>
-                                    ${res.data}
-                                </div>
-                            </div>
-                        </li>
-                        `;
-                        queryinput.val('');
-                        $(".airesponse").append(html);
-
-                    }else{
-                        queryinput.val('');
-                        alert('Error!', res.message, 'error');
-                    }
-                },
-                error: function () {
-                    $this.text('Send')
-                    queryinput.val('');
-                    alert('Error!', 'Something went wrong.', 'error');
-                }
-            })
-
-        });
-    });
-
-</script>
 
 @endsection

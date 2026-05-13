@@ -36,7 +36,15 @@ class ReportController extends Controller
     }
 
     function user_query(Request $request){
-        $this->data = $this->getSheetDataByDateRange('2022-06-03','2022-06-05');
+        $event = $this->extractEventType($request->get('query'));
+        //echo $event;
+        $dates = $this->getDateKeyword($request->get('query'));
+        //echo "<pre>"; print_r($dates); die();
+        $start = ($dates['start_date'] !="" ? $dates['start_date'] : date('Y-m-d'));
+        $end = ($dates['end_date'] !="" ? $dates['end_date'] : date('Y-m-d'));
+        //echo "<pre>"; print_r($start); print_r($end); die();
+        $this->data = $this->getSheetDataByDateRange($start,$end,$event);
+        //echo "<pre>"; print_r($this->data); die();
         $this->filterdata = $this->filterData($this->data);
         $result = $this->generateReport($request->get('query'));
         return response()->json([
@@ -44,82 +52,134 @@ class ReportController extends Controller
             'data'    => $result['report'],
         ]);
     }
+    function extractEventType($query){
+        preg_match(
+            '/Event[:\s]+(.*?)(?=\s+(for|this|today|month|year|week|day|report|info)\b|$)/i',
+            $query,
+            $matches
+        );
+    
+        return trim($matches[1] ?? '');
+    }
 
     function getDateKeyword($reportInstruction=''){
         $instruction = strtolower(trim($reportInstruction));
         $startDate = null;
         $endDate = null;
-        // TODAY
-        if (str_contains($instruction, 'today')) {
 
-            $startDate = Carbon::today()->startOfDay();
-            $endDate = Carbon::today()->endOfDay();
+        if(str_contains($instruction, 'compare')){
+            if(str_contains($instruction, 'compare last month to this month')){
+                $startDate = Carbon::now()
+                ->subMonth()
+                ->startOfMonth()
+                ->toDateString();
+
+                $endDate = Carbon::now()
+                ->toDateString();
+            }else if(str_contains($instruction, 'compare last week to this week')){
+                $startDate = Carbon::now()
+                ->subWeek()
+                ->startOfWeek()
+                ->toDateString();
+                $endDate = Carbon::now()
+                ->endOfWeek()
+                ->toDateString();
+            }else{
+
+                $startDate = Carbon::now()->startOfWeek()->toDateString();
+                $endDate = Carbon::now()->endOfWeek()->toDateString();
+            }
+
+
+        }else{
+            // TODAY
+            if (str_contains($instruction, 'today')) {
+
+                $startDate = Carbon::today()->startOfDay()->toDateString();
+                $endDate = Carbon::today()->endOfDay()->toDateString();
+
+            }
+
+            // YESTERDAY
+            elseif (str_contains($instruction, 'yesterday')) {
+
+                $startDate = Carbon::yesterday()->startOfDay()->toDateString();
+                $endDate = Carbon::yesterday()->endOfDay()->toDateString();
+
+            }
+
+            // THIS WEEK
+            elseif (str_contains($instruction, 'this week')) {
+
+                $startDate = Carbon::now()->startOfWeek()->toDateString();
+                $endDate = Carbon::now()->endOfWeek()->toDateString();
+
+            }
+
+            elseif (str_contains($instruction, 'this week')) {
+
+                $startDate = Carbon::now()->startOfWeek()->toDateString();
+                $endDate = Carbon::now()->endOfWeek()->toDateString();
+
+            }
+
+            // LAST TWO WEEKS
+            elseif (
+                str_contains($instruction, 'last two week') ||
+                str_contains($instruction, 'last 2 week')
+            ) {
+
+                $startDate = Carbon::now()->subWeeks(2)->startOfDay()->toDateString();
+                $endDate = Carbon::now()->endOfDay()->toDateString();
+
+            }
+
+
+            // THIS MONTH
+            elseif (str_contains($instruction, 'this month')) {
+
+                $startDate = Carbon::now()->startOfMonth()->toDateString();
+                $endDate = Carbon::now()->endOfMonth()->toDateString();
+
+            }else{
+                $startDate = Carbon::now()->startOfWeek()->toDateString();
+                $endDate = Carbon::now()->endOfWeek()->toDateString();
+            }
 
         }
 
-        // YESTERDAY
-        elseif (str_contains($instruction, 'yesterday')) {
-
-            $startDate = Carbon::yesterday()->startOfDay();
-            $endDate = Carbon::yesterday()->endOfDay();
-
-        }
-
-        // THIS WEEK
-        elseif (str_contains($instruction, 'this week')) {
-
-            $startDate = Carbon::now()->startOfWeek();
-            $endDate = Carbon::now()->endOfWeek();
-
-        }
-
-        // LAST TWO WEEKS
-        elseif (
-            str_contains($instruction, 'last two week') ||
-            str_contains($instruction, 'last 2 week')
-        ) {
-
-            $startDate = Carbon::now()->subWeeks(2)->startOfDay();
-            $endDate = Carbon::now()->endOfDay();
-
-        }
-
-        // THIS MONTH
-        elseif (str_contains($instruction, 'this month')) {
-
-            $startDate = Carbon::now()->startOfMonth();
-            $endDate = Carbon::now()->endOfMonth();
-
-        }
+        $data['start_date'] = $startDate;
+        $data['end_date'] = $endDate;
+        return $data;
 
         // FILTER DATA
-        if ($startDate && $endDate) {
+        // if ($startDate && $endDate) {
 
-            $filteredData = array_filter($dataText, function ($row) use ($startDate, $endDate) {
+        //     $filteredData = array_filter($dataText, function ($row) use ($startDate, $endDate) {
 
-                if (empty($row['preferred_date'])) {
-                    return false;
-                }
+        //         if (empty($row['preferred_date'])) {
+        //             return false;
+        //         }
 
-                $date = Carbon::parse($row['preferred_date']);
+        //         $date = Carbon::parse($row['preferred_date']);
 
-                return $date->between($startDate, $endDate);
+        //         return $date->between($startDate, $endDate);
 
-            });
+        //     });
 
-            $filteredData = array_values($filteredData);
+        //     $filteredData = array_values($filteredData);
 
-        } else {
+        // } else {
 
-            $filteredData = $dataText;
+        //     $filteredData = $dataText;
 
-        }
+        // }
     }
 
     function test(){
     }
 
-    public function getSheetDataByDateRange($startDate, $endDate){
+    public function getSheetDataByDateRange($startDate, $endDate,$eventType=""){
         $url = "https://docs.google.com/spreadsheets/d/" . $this->sheetId . "/export?format=csv&gid=" . $this->gid;
 
         $response = Http::get($url);
@@ -154,10 +214,14 @@ class ReportController extends Controller
 
         // Find Submission Date column
         $dateIndex = array_search('Submission Date', $headers);
-
+        $eventIndex = array_search('Type  of event', $headers);
         if ($dateIndex === false) {
             return ['error' => 'Submission Date column not found'];
         }
+        if ($eventType && $eventIndex === false) {
+            return ['error' => 'Type  of event column not found'];
+        }
+
 
         $filtered = [];
 
@@ -178,6 +242,37 @@ class ReportController extends Controller
             // Check date range
             if ($rowDate >= $startDate && $rowDate <= $endDate) {
 
+                // Event filter
+                if ($eventType) {
+
+                    $rowEvent = strtolower(trim($row[$eventIndex] ?? ''));
+                    $searchEvent = strtolower(trim($eventType));
+                
+                    // Remove special chars
+                    $rowEventClean = preg_replace('/[^a-z0-9]/i', ' ', $rowEvent);
+                    $searchEventClean = preg_replace('/[^a-z0-9]/i', ' ', $searchEvent);
+                
+                    // Split into words
+                    $searchWords = array_filter(explode(' ', $searchEventClean));
+                
+                    $matched = false;
+                
+                    foreach ($searchWords as $word) {
+                
+                        if (strlen($word) < 3) {
+                            continue;
+                        }
+                
+                        if (stripos($rowEventClean, $word) !== false) {
+                            $matched = true;
+                            break;
+                        }
+                    }
+                
+                    if (!$matched) {
+                        continue;
+                    }
+                }
                 // Prevent column mismatch
                 $row = array_pad($row, count($headers), null);
 
@@ -274,7 +369,10 @@ class ReportController extends Controller
 
         }
         $filteredData = array_values($filteredData);
-        $response = Http::withHeaders([
+        //echo "<pre>"; print_r($filteredData); die();
+        $response = Http::timeout(120)
+        ->connectTimeout(30)
+        ->withHeaders([
             'Authorization' => 'Bearer ' . env('OPENAI_API_KEY'),
             'Content-Type' => 'application/json',
         ])->post('https://api.openai.com/v1/chat/completions', [
@@ -322,7 +420,7 @@ class ReportController extends Controller
                     - calculate total Wedding leads
                     - provide concise operational insight
                     - Show Total of all lead category
-                    
+
                     3. Ernie section:
                     - summarize broader event diversity
                     - show top event categories with totals
@@ -331,7 +429,7 @@ class ReportController extends Controller
                     - identify top event categories
                     - calculate total Ernie leads
                     - Show Total of all lead category
-                    
+
                     4. Generate intelligent other events breakdowns for Ernie:
                     Examples:
                     - Social Celebrations
@@ -375,7 +473,7 @@ class ReportController extends Controller
                     - Calculate totals directly from dataset
                     - Use exact counts whenever possible
                     - Use approximate values only when categorization is uncertain
-                    
+
                     STYLE RULES:
                     - Use professional operational reporting tone
                     - Use concise executive commentary
@@ -422,7 +520,7 @@ class ReportController extends Controller
                 ],
                 [
                     'role' => 'user',
-                    'content' =>  "User Request:{$reportInstruction}
+                    'content' =>  "User Request:{$instruction}
                     Lead Data:" . json_encode($filteredData)
                 ],
             ],
