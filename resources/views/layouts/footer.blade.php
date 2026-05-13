@@ -36,7 +36,7 @@
 
                 <button
                     type="button"
-                    class="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
+                    class="send_query absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
                     data-bs-dismiss="modal"
                     aria-label="Close"
                 >
@@ -45,20 +45,13 @@
             </div>
 
             <!-- Body -->
-            <div class="flex-1 px-6 py-4 overflow-auto" style="height: 420px;">
+            <div class="flex-1 px-6 py-4 overflow-auto">
 
                 <div class="space-y-4">
 
                     <div class="flex justify-start d-flex justify-content-start">
-                        <div class="max-w-[80%] rounded-lg px-4 py-3 bg-muted text-foreground">
-                            <p class="text-sm leading-relaxed mb-1">
-                                Hi! I'm Penny AI, your analytics assistant.
-                                Ask me anything about your leads and revenue data.
-                            </p>
+                        <div class="airesponse">
 
-                            <span class="text-xs opacity-70 block">
-                                18:25
-                            </span>
                         </div>
                     </div>
 
@@ -73,21 +66,47 @@
                 <div class="flex flex-wrap gap-2 d-flex flex-wrap gap-2 mb-3">
 
                     <button
-                        class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border bg-transparent shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 border-border dark:hover:bg-input/50 h-8 rounded-md px-3 text-xs"
+                        class="pre_query inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border bg-transparent shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 border-border dark:hover:bg-input/50 h-8 rounded-md px-3 text-xs"
                     >
                         Compare last month to this month
                     </button>
 
                     <button
-                        class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border bg-transparent shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 border-border dark:hover:bg-input/50 h-8 rounded-md px-3 text-xs"
+                        class="pre_query inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border bg-transparent shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 border-border dark:hover:bg-input/50 h-8 rounded-md px-3 text-xs"
                     >
-                        What's the revenue trend?
+                        Compare last week to this week
                     </button>
 
                     <button
-                        class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border bg-transparent shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 border-border dark:hover:bg-input/50 h-8 rounded-md px-3 text-xs"
+                        class="pre_query inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border bg-transparent shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 border-border dark:hover:bg-input/50 h-8 rounded-md px-3 text-xs"
                     >
-                        How many leads this week?
+                        What's the total leads of Event Wedding?
+                    </button>
+
+                    <button
+                        class="pre_query inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border bg-transparent shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 border-border dark:hover:bg-input/50 h-8 rounded-md px-3 text-xs"
+                    >
+                        How many leads for this week?
+                    </button>
+                    <button
+                        class="pre_query inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border bg-transparent shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 border-border dark:hover:bg-input/50 h-8 rounded-md px-3 text-xs"
+                    >
+                        How many leads for last two week?
+                    </button>
+                    <button
+                        class="pre_query inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border bg-transparent shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 border-border dark:hover:bg-input/50 h-8 rounded-md px-3 text-xs"
+                    >
+                        Report for last week?
+                    </button>
+                    <button
+                        class="pre_query inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border bg-transparent shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 border-border dark:hover:bg-input/50 h-8 rounded-md px-3 text-xs"
+                    >
+                        Report for this week?
+                    </button>
+                    <button
+                        class="pre_query inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border bg-transparent shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 border-border dark:hover:bg-input/50 h-8 rounded-md px-3 text-xs"
+                    >
+                        Report for Two week?
                     </button>
 
                 </div>
@@ -98,11 +117,12 @@
                     <input
                         type="text"
                         class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-xs transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm flex-1"
+                        id="query_input"
                         placeholder="Ask Penny about your analytics..."
                     >
 
                     <button
-                        class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 w-9"
+                        class="send_query inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 w-9"
                     >
                         <i data-lucide="send" class="h-4 w-4"></i>
                     </button>
@@ -127,3 +147,4 @@
 
 
 </footer>
+
