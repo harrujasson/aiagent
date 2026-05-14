@@ -3162,7 +3162,16 @@ body{
 .user-responce {
     align-self: flex-end;
 }
-
+svg.loader {
+    display: none;
+}
+.loading svg.loader {
+    display: block;
+    opacity: 1;
+}
+.loading svg.lucide {
+    display: none;
+}
 /* Responsive */
 @media (max-width: 768px) {
     .ctext-wrap {

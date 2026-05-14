@@ -43,7 +43,7 @@
 
     <main class="py-8 space-y-8">
 
-        <!-- <div class="cus-dashboard-header">
+        <div class="cus-dashboard-header">
             <div class="flex items-center justify-between flex-wrap gap-4">
                 <div>
                     <h2 class="font-serif text-2xl font-bold text-foreground">
@@ -135,24 +135,670 @@
             
             <div class="tab-content" id="dashboardTabsContent">
                
-                <div class="tab-pane fade show active" id="event-sales" role="tabpanel">
+                <div class="tab-pane fade show active  space-y-8" id="event-sales" role="tabpanel">
 
-                    Event Sales Content Here
+                    <section>
+                        <div class="mb-6 border-bottom border-border pb-4">
+                            <h2 class="font-serif text-2xl font-bold text-foreground flex items-center gap-2">
+                                Weddings - Cristian
+                            </h2>
+                        </div>
 
+                        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+                            <div class="rounded-lg border bg-card text-card-foreground shadow-md hover:shadow-lg transition-shadow">
+                                <div class="flex flex-col space-y-1.5 p-6 pb-3">
+                                    <div class="font-semibold tracking-tight font-serif text-lg text-secondary">
+                                        Leads May
+                                    </div>
+                                </div>
+
+                                <div class="p-6 pt-0 space-y-3">
+                                    <div class="font-mono text-3xl font-bold text-foreground tabular-nums">
+                                        52
+                                    </div>
+
+                                    <div class="flex items-center gap-2">
+                                        <div class="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors border-transparent bg-primary text-primary-foreground shadow hover:bg-primary/80 gap-1">
+                                            <i data-lucide="arrow-up" class="h-3 w-3"></i>
+                                            18.1%
+                                        </div>
+
+                                        <span class="text-sm text-muted-foreground">
+                                            vs 44 last month
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="rounded-lg border bg-card text-card-foreground shadow-md hover:shadow-lg transition-shadow">
+                                <div class="flex flex-col space-y-1.5 p-6 pb-3">
+                                    <div class="font-semibold tracking-tight font-serif text-lg text-secondary">
+                                       Sales May
+                                    </div>
+                                </div>
+
+                                <div class="p-6 pt-0 space-y-3">
+                                    <div class="font-mono text-3xl font-bold text-foreground tabular-nums">
+                                        $248,000
+                                    </div>
+
+                                    <div class="flex items-center gap-2">
+                                        <div class="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors border-transparent bg-destructive/90 text-destructive-foreground shadow hover:bg-destructive gap-1">
+                                            <i data-lucide="arrow-down" class="h-3 w-3"></i>
+                                            22%
+                                        </div>
+
+                                        <span class="text-sm text-muted-foreground">
+                                            vs $203,360 last month
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+        
+                    <section>
+                        <div class="rounded-lg border bg-card text-card-foreground shadow-md">
+
+                            <div class="flex flex-col space-y-1.5 p-6">
+                                <div class="font-semibold leading-none tracking-tight font-serif flex items-center gap-2 text-xl">                    
+                                Trend
+                                </div>
+
+                                <!-- <div class="text-sm text-muted-foreground">
+                                    Leads and revenue performance (revenue in thousands)
+                                </div> -->
+                            </div>
+
+                            <div class="p-6 pt-0">
+                                <div id="line_chart_datalabel" class="apex-charts" dir="ltr"></div>
+                            </div>
+
+                        </div>
+                    </section>
+
+
+                    <section>
+                        <div class="mb-6 border-bottom border-border pb-4">
+                            <h2 class="font-serif text-2xl font-bold text-foreground flex items-center gap-2">
+                                Wellness - Marisa T
+                            </h2>
+                        </div>
+
+                        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+                            <div class="rounded-lg border bg-card text-card-foreground shadow-md hover:shadow-lg transition-shadow">
+                                <div class="flex flex-col space-y-1.5 p-6 pb-3">
+                                    <div class="font-semibold tracking-tight font-serif text-lg text-secondary">
+                                        Leads May
+                                    </div>
+                                </div>
+
+                                <div class="p-6 pt-0 space-y-3">
+                                    <div class="font-mono text-3xl font-bold text-foreground tabular-nums">
+                                        41
+                                    </div>
+
+                                    <div class="flex items-center gap-2">
+                                        <div class="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors border-transparent bg-primary text-primary-foreground shadow hover:bg-primary/80 gap-1">
+                                            <i data-lucide="arrow-up" class="h-3 w-3"></i>
+                                            20.6%
+                                        </div>
+
+                                        <span class="text-sm text-muted-foreground">
+                                            vs 34 last month
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="rounded-lg border bg-card text-card-foreground shadow-md hover:shadow-lg transition-shadow">
+                                <div class="flex flex-col space-y-1.5 p-6 pb-3">
+                                    <div class="font-semibold tracking-tight font-serif text-lg text-secondary">
+                                       Sales May
+                                    </div>
+                                </div>
+
+                                <div class="p-6 pt-0 space-y-3">
+                                    <div class="font-mono text-3xl font-bold text-foreground tabular-nums">
+                                        $28,400
+                                    </div>
+
+                                    <div class="flex items-center gap-2">
+                                        <div class="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors border-transparent bg-destructive/90 text-destructive-foreground shadow hover:bg-destructive gap-1">
+                                            <i data-lucide="arrow-down" class="h-3 w-3"></i>
+                                            22%
+                                        </div>
+
+                                        <span class="text-sm text-muted-foreground">
+                                            vs $23,288 last month
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+        
+                    <section>
+                        <div class="rounded-lg border bg-card text-card-foreground shadow-md">
+
+                            <div class="flex flex-col space-y-1.5 p-6">
+                                <div class="font-semibold leading-none tracking-tight font-serif flex items-center gap-2 text-xl">                    
+                                Trend
+                                </div>
+
+                                <!-- <div class="text-sm text-muted-foreground">
+                                    Leads and revenue performance (revenue in thousands)
+                                </div> -->
+                            </div>
+
+                            <div class="p-6 pt-0">
+                                <div id="line_chart_datalabel1" class="apex-charts" dir="ltr"></div>
+                            </div>
+
+                        </div>
+                    </section>
+
+                    <section>
+                        <div class="mb-6 border-bottom border-border pb-4">
+                            <h2 class="font-serif text-2xl font-bold text-foreground flex items-center gap-2">
+                                Events - Ernie
+                            </h2>
+                        </div>
+
+                        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+                            <div class="rounded-lg border bg-card text-card-foreground shadow-md hover:shadow-lg transition-shadow">
+                                <div class="flex flex-col space-y-1.5 p-6 pb-3">
+                                    <div class="font-semibold tracking-tight font-serif text-lg text-secondary">
+                                        Leads May
+                                    </div>
+                                </div>
+
+                                <div class="p-6 pt-0 space-y-3">
+                                    <div class="font-mono text-3xl font-bold text-foreground tabular-nums">
+                                       63
+                                    </div>
+
+                                    <div class="flex items-center gap-2">
+                                        <div class="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors border-transparent bg-primary text-primary-foreground shadow hover:bg-primary/80 gap-1">
+                                            <i data-lucide="arrow-up" class="h-3 w-3"></i>
+                                            18.9%
+                                        </div>
+
+                                        <span class="text-sm text-muted-foreground">
+                                           vs 53 last month
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="rounded-lg border bg-card text-card-foreground shadow-md hover:shadow-lg transition-shadow">
+                                <div class="flex flex-col space-y-1.5 p-6 pb-3">
+                                    <div class="font-semibold tracking-tight font-serif text-lg text-secondary">
+                                       Sales May
+                                    </div>
+                                </div>
+
+                                <div class="p-6 pt-0 space-y-3">
+                                    <div class="font-mono text-3xl font-bold text-foreground tabular-nums">
+                                        $42,800
+                                    </div>
+
+                                    <div class="flex items-center gap-2">
+                                        <div class="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors border-transparent bg-destructive/90 text-destructive-foreground shadow hover:bg-destructive gap-1">
+                                            <i data-lucide="arrow-down" class="h-3 w-3"></i>
+                                            22%
+                                        </div>
+
+                                        <span class="text-sm text-muted-foreground">
+                                            vs $35,096 last month
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+        
+                    <section>
+                        <div class="rounded-lg border bg-card text-card-foreground shadow-md">
+
+                            <div class="flex flex-col space-y-1.5 p-6">
+                                <div class="font-semibold leading-none tracking-tight font-serif flex items-center gap-2 text-xl">                    
+                                Trend
+                                </div>
+
+                                <!-- <div class="text-sm text-muted-foreground">
+                                    Leads and revenue performance (revenue in thousands)
+                                </div> -->
+                            </div>
+
+                            <div class="p-6 pt-0">
+                                <div id="line_chart_datalabel2" class="apex-charts" dir="ltr"></div>
+                            </div>
+
+                        </div>
+                    </section>
                 </div>
 
                 
-                <div class="tab-pane fade" id="revenue" role="tabpanel">
+                <div class="tab-pane fade  space-y-8" id="revenue" role="tabpanel">
 
-                    Revenue Content Here
+                    <section>
+                        <div class="mb-6 border-bottom border-border pb-4">
+                            <h2 class="font-serif text-2xl font-bold text-foreground flex items-center gap-2">
+                                The Cantina - Becky
+                            </h2>
+                        </div>
+
+                        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+                            <div class="rounded-lg border bg-card text-card-foreground shadow-md hover:shadow-lg transition-shadow">
+                                <div class="flex flex-col space-y-1.5 p-6 pb-3">
+                                    <div class="font-semibold tracking-tight font-serif text-lg text-secondary">
+                                        Food/Drink/Staff Expenses May
+                                    </div>
+                                </div>
+
+                                <div class="p-6 pt-0 space-y-3">
+                                    <div class="font-mono text-3xl font-bold text-foreground tabular-nums">
+                                       $212,000
+                                    </div>
+
+                                    <div class="flex items-center gap-2">
+                                        <div class="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors border-transparent bg-primary text-primary-foreground shadow hover:bg-primary/80 gap-1">
+                                            <i data-lucide="arrow-up" class="h-3 w-3"></i>
+                                            11.1%
+                                        </div>
+
+                                        <span class="text-sm text-muted-foreground">
+                                           vs $190,800 last month
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="rounded-lg border bg-card text-card-foreground shadow-md hover:shadow-lg transition-shadow">
+                                <div class="flex flex-col space-y-1.5 p-6 pb-3">
+                                    <div class="font-semibold tracking-tight font-serif text-lg text-secondary">
+                                       Revenue May
+                                    </div>
+                                </div>
+
+                                <div class="p-6 pt-0 space-y-3">
+                                    <div class="font-mono text-3xl font-bold text-foreground tabular-nums">
+                                        $385,000
+                                    </div>
+
+                                    <div class="flex items-center gap-2">
+                                        <div class="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors border-transparent bg-destructive/90 text-destructive-foreground shadow hover:bg-destructive gap-1">
+                                            <i data-lucide="arrow-down" class="h-3 w-3"></i>
+                                            13.6%
+                                        </div>
+
+                                        <span class="text-sm text-muted-foreground">
+                                            vs $338,800 last month
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+        
+                    <section>
+                        <div class="rounded-lg border bg-card text-card-foreground shadow-md">
+
+                            <div class="flex flex-col space-y-1.5 p-6">
+                                <div class="font-semibold leading-none tracking-tight font-serif flex items-center gap-2 text-xl">                    
+                                Trend
+                                </div>
+
+                                <!-- <div class="text-sm text-muted-foreground">
+                                    Leads and revenue performance (revenue in thousands)
+                                </div> -->
+                            </div>
+
+                            <div class="p-6 pt-0">
+                                <div id="line_chart_datalabel3" class="apex-charts" dir="ltr"></div>
+                            </div>
+
+                        </div>
+                    </section>
+
+
+                    <section>
+                        <div class="mb-6 border-bottom border-border pb-4">
+                            <h2 class="font-serif text-2xl font-bold text-foreground flex items-center gap-2">
+                                Weddings - Cristian
+                            </h2>
+                        </div>
+
+                        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+                            <div class="rounded-lg border bg-card text-card-foreground shadow-md hover:shadow-lg transition-shadow">
+                                <div class="flex flex-col space-y-1.5 p-6 pb-3">
+                                    <div class="font-semibold tracking-tight font-serif text-lg text-secondary">
+                                        Food/Drink/Staff Expenses May
+                                    </div>
+                                </div>
+
+                                <div class="p-6 pt-0 space-y-3">
+                                    <div class="font-mono text-3xl font-bold text-foreground tabular-nums">
+                                       $178,000
+                                    </div>
+
+                                    <div class="flex items-center gap-2">
+                                        <div class="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors border-transparent bg-primary text-primary-foreground shadow hover:bg-primary/80 gap-1">
+                                            <i data-lucide="arrow-up" class="h-3 w-3"></i>
+                                            11.1%
+                                        </div>
+
+                                        <span class="text-sm text-muted-foreground">
+                                           vs $160,200 last month
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="rounded-lg border bg-card text-card-foreground shadow-md hover:shadow-lg transition-shadow">
+                                <div class="flex flex-col space-y-1.5 p-6 pb-3">
+                                    <div class="font-semibold tracking-tight font-serif text-lg text-secondary">
+                                       Revenue May
+                                    </div>
+                                </div>
+
+                                <div class="p-6 pt-0 space-y-3">
+                                    <div class="font-mono text-3xl font-bold text-foreground tabular-nums">
+                                        $520,000
+                                    </div>
+
+                                    <div class="flex items-center gap-2">
+                                        <div class="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors border-transparent bg-destructive/90 text-destructive-foreground shadow hover:bg-destructive gap-1">
+                                            <i data-lucide="arrow-down" class="h-3 w-3"></i>
+                                            13.6%
+                                        </div>
+
+                                        <span class="text-sm text-muted-foreground">
+                                            vs $457,600 last month
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+        
+                    <section>
+                        <div class="rounded-lg border bg-card text-card-foreground shadow-md">
+
+                            <div class="flex flex-col space-y-1.5 p-6">
+                                <div class="font-semibold leading-none tracking-tight font-serif flex items-center gap-2 text-xl">                    
+                                Trend
+                                </div>
+
+                                <!-- <div class="text-sm text-muted-foreground">
+                                    Leads and revenue performance (revenue in thousands)
+                                </div> -->
+                            </div>
+
+                            <div class="p-6 pt-0">
+                                <div id="line_chart_datalabel4" class="apex-charts" dir="ltr"></div>
+                            </div>
+
+                        </div>
+                    </section>
+
+
+                    <section>
+                        <div class="mb-6 border-bottom border-border pb-4">
+                            <h2 class="font-serif text-2xl font-bold text-foreground flex items-center gap-2">
+                               Wellness - Marisa T
+                            </h2>
+                        </div>
+
+                        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+                            <div class="rounded-lg border bg-card text-card-foreground shadow-md hover:shadow-lg transition-shadow">
+                                <div class="flex flex-col space-y-1.5 p-6 pb-3">
+                                    <div class="font-semibold tracking-tight font-serif text-lg text-secondary">
+                                        Food/Drink/Staff Expenses May
+                                    </div>
+                                </div>
+
+                                <div class="p-6 pt-0 space-y-3">
+                                    <div class="font-mono text-3xl font-bold text-foreground tabular-nums">
+                                       $105,000
+                                    </div>
+
+                                    <div class="flex items-center gap-2">
+                                        <div class="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors border-transparent bg-primary text-primary-foreground shadow hover:bg-primary/80 gap-1">
+                                            <i data-lucide="arrow-up" class="h-3 w-3"></i>
+                                            11.1%
+                                        </div>
+
+                                        <span class="text-sm text-muted-foreground">
+                                           vs $94,500 last month
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="rounded-lg border bg-card text-card-foreground shadow-md hover:shadow-lg transition-shadow">
+                                <div class="flex flex-col space-y-1.5 p-6 pb-3">
+                                    <div class="font-semibold tracking-tight font-serif text-lg text-secondary">
+                                       Revenue May
+                                    </div>
+                                </div>
+
+                                <div class="p-6 pt-0 space-y-3">
+                                    <div class="font-mono text-3xl font-bold text-foreground tabular-nums">
+                                        $280,000
+                                    </div>
+
+                                    <div class="flex items-center gap-2">
+                                        <div class="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors border-transparent bg-destructive/90 text-destructive-foreground shadow hover:bg-destructive gap-1">
+                                            <i data-lucide="arrow-down" class="h-3 w-3"></i>
+                                            13.6%
+                                        </div>
+
+                                        <span class="text-sm text-muted-foreground">
+                                            vs $246,400 last month
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+        
+                    <section>
+                        <div class="rounded-lg border bg-card text-card-foreground shadow-md">
+
+                            <div class="flex flex-col space-y-1.5 p-6">
+                                <div class="font-semibold leading-none tracking-tight font-serif flex items-center gap-2 text-xl">                    
+                                Trend
+                                </div>
+
+                                <!-- <div class="text-sm text-muted-foreground">
+                                    Leads and revenue performance (revenue in thousands)
+                                </div> -->
+                            </div>
+
+                            <div class="p-6 pt-0">
+                                <div id="line_chart_datalabel5" class="apex-charts" dir="ltr"></div>
+                            </div>
+
+                        </div>
+                    </section>
+
+                    <section>
+                        <div class="mb-6 border-bottom border-border pb-4">
+                            <h2 class="font-serif text-2xl font-bold text-foreground flex items-center gap-2">
+                              Other Events - Ernie
+                            </h2>
+                        </div>
+
+                        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+                            <div class="rounded-lg border bg-card text-card-foreground shadow-md hover:shadow-lg transition-shadow">
+                                <div class="flex flex-col space-y-1.5 p-6 pb-3">
+                                    <div class="font-semibold tracking-tight font-serif text-lg text-secondary">
+                                        Food/Drink/Staff Expenses May
+                                    </div>
+                                </div>
+
+                                <div class="p-6 pt-0 space-y-3">
+                                    <div class="font-mono text-3xl font-bold text-foreground tabular-nums">
+                                       $141,000
+                                    </div>
+
+                                    <div class="flex items-center gap-2">
+                                        <div class="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors border-transparent bg-primary text-primary-foreground shadow hover:bg-primary/80 gap-1">
+                                            <i data-lucide="arrow-up" class="h-3 w-3"></i>
+                                            11.1%
+                                        </div>
+
+                                        <span class="text-sm text-muted-foreground">
+                                           vs $126,900 last month
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="rounded-lg border bg-card text-card-foreground shadow-md hover:shadow-lg transition-shadow">
+                                <div class="flex flex-col space-y-1.5 p-6 pb-3">
+                                    <div class="font-semibold tracking-tight font-serif text-lg text-secondary">
+                                       Revenue May
+                                    </div>
+                                </div>
+
+                                <div class="p-6 pt-0 space-y-3">
+                                    <div class="font-mono text-3xl font-bold text-foreground tabular-nums">
+                                        $315,000
+                                    </div>
+
+                                    <div class="flex items-center gap-2">
+                                        <div class="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors border-transparent bg-destructive/90 text-destructive-foreground shadow hover:bg-destructive gap-1">
+                                            <i data-lucide="arrow-down" class="h-3 w-3"></i>
+                                            13.6%
+                                        </div>
+
+                                        <span class="text-sm text-muted-foreground">
+                                            vs $277,200 last month
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+        
+                    <section>
+                        <div class="rounded-lg border bg-card text-card-foreground shadow-md">
+
+                            <div class="flex flex-col space-y-1.5 p-6">
+                                <div class="font-semibold leading-none tracking-tight font-serif flex items-center gap-2 text-xl">                    
+                                Trend
+                                </div>
+
+                                <!-- <div class="text-sm text-muted-foreground">
+                                    Leads and revenue performance (revenue in thousands)
+                                </div> -->
+                            </div>
+
+                            <div class="p-6 pt-0">
+                                <div id="line_chart_datalabel6" class="apex-charts" dir="ltr"></div>
+                            </div>
+
+                        </div>
+                    </section>
+
+                    <section>
+                        <div class="mb-6 border-bottom border-border pb-4">
+                            <h2 class="font-serif text-2xl font-bold text-foreground flex items-center gap-2">
+                             Organic Market - Luisa
+                            </h2>
+                        </div>
+
+                        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+                            <div class="rounded-lg border bg-card text-card-foreground shadow-md hover:shadow-lg transition-shadow">
+                                <div class="flex flex-col space-y-1.5 p-6 pb-3">
+                                    <div class="font-semibold tracking-tight font-serif text-lg text-secondary">
+                                        Food/Drink/Staff Expenses May
+                                    </div>
+                                </div>
+
+                                <div class="p-6 pt-0 space-y-3">
+                                    <div class="font-mono text-3xl font-bold text-foreground tabular-nums">
+                                       $62,000
+                                    </div>
+
+                                    <div class="flex items-center gap-2">
+                                        <div class="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors border-transparent bg-primary text-primary-foreground shadow hover:bg-primary/80 gap-1">
+                                            <i data-lucide="arrow-up" class="h-3 w-3"></i>
+                                            11.1%
+                                        </div>
+
+                                        <span class="text-sm text-muted-foreground">
+                                          vs $55,800 last month
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="rounded-lg border bg-card text-card-foreground shadow-md hover:shadow-lg transition-shadow">
+                                <div class="flex flex-col space-y-1.5 p-6 pb-3">
+                                    <div class="font-semibold tracking-tight font-serif text-lg text-secondary">
+                                       Revenue May
+                                    </div>
+                                </div>
+
+                                <div class="p-6 pt-0 space-y-3">
+                                    <div class="font-mono text-3xl font-bold text-foreground tabular-nums">
+                                        $148,000
+                                    </div>
+
+                                    <div class="flex items-center gap-2">
+                                        <div class="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors border-transparent bg-destructive/90 text-destructive-foreground shadow hover:bg-destructive gap-1">
+                                            <i data-lucide="arrow-down" class="h-3 w-3"></i>
+                                            13.6%
+                                        </div>
+
+                                        <span class="text-sm text-muted-foreground">
+                                            vs $130,240 last month
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+        
+                    <section>
+                        <div class="rounded-lg border bg-card text-card-foreground shadow-md">
+
+                            <div class="flex flex-col space-y-1.5 p-6">
+                                <div class="font-semibold leading-none tracking-tight font-serif flex items-center gap-2 text-xl">                    
+                                Trend
+                                </div>
+
+                                <!-- <div class="text-sm text-muted-foreground">
+                                    Leads and revenue performance (revenue in thousands)
+                                </div> -->
+                            </div>
+
+                            <div class="p-6 pt-0">
+                                <div id="line_chart_datalabel7" class="apex-charts" dir="ltr"></div>
+                            </div>
+
+                        </div>
+                    </section>
 
                 </div>
 
             </div>
-        </div> -->
+        </div>
 
         
-        <section>
+        <!-- <section>
             <div class="mb-6">
                 <h2 class="font-serif text-2xl font-bold text-foreground flex items-center gap-2">
                     <i data-lucide="trending-up" class="h-6 w-6 text-primary"></i>
@@ -428,7 +1074,7 @@
 
             </div>
 
-        </section>
+        </section> -->
 
     </main>
 </div>
@@ -516,87 +1162,149 @@
    <!-- <script src="{{ URL::asset('build/js/pages/apexcharts.init.js') }}"></script> -->
    
    <script type="text/javascript">
-      $(document).ready(function() {
-         var options = {
-            chart: {
-               height: 380,
-               type: "line",
-               zoom: {
-                  enabled: !1
-               },
-               toolbar: {
-                  show: !1
-               }
-            },
-            colors: ["#2a5511", "#3a7851"],
-            dataLabels: {
-               enabled: !1
-            },
-            stroke: {
-               width: [3, 3],
-               curve: "straight"
-            },
-            series: [{
-               name: "Leads",
-               data: [26, 24, 32, 36, 33, 31]
-            }, {
-               name: "Revenue",
-               data: [14, 11, 16, 12, 17, 13]
-            }],
-            // title: {
-            //    text: "Average High & Low Temperature",
-            //    align: "left",
-            //    style: {
-            //       fontWeight: "500"
-            //    }
-            // },
-            grid: {
-               row: {
-                  colors: ["transparent", "transparent"],
-                  opacity: .2
-               },
-               borderColor: "#f1f1f1"
-            },
-            markers: {
-               style: "inverted",
-               size: 6
-            },
-            xaxis: {
-               categories: ["Apr 1", "Apr 8", "Apr 15", "Apr 22", "May 1", "May 1"],
-               // title: {
-               //    text: "Month"
-               // }
-            },
-            yaxis: {
-               // title: {
-               //    text: "Temperature"
-               // },
-               min: 5,
-               max: 40
-            },
-            legend: {
-               position: "top",
-               horizontalAlign: "right",
-               floating: !0,
-               offsetY: -25,
-               offsetX: -5
-            },
-            responsive: [{
-               breakpoint: 600,
-               options: {
-                  chart: {
-                  toolbar: {
-                     show: !1
-                  }
-                  },
-                  legend: {
-                  show: !1
-                  }
-               }
-            }]
-            },
-            chart = new ApexCharts(document.querySelector("#line_chart_datalabel"), options);
+    $(document).ready(function () {
+
+        function createChart(chartId, aprilData, mayData) {
+
+            var options = {
+                chart: {
+                    height: 380,
+                    type: "line",
+                    zoom: {
+                        enabled: false
+                    },
+                    toolbar: {
+                        show: false
+                    }
+                },
+
+                colors: ["#ef4343", "#3a82f6"],
+
+                dataLabels: {
+                    enabled: false
+                },
+
+                stroke: {
+                    width: [3, 3],
+                    curve: "straight"
+                },
+
+                series: [
+                    {
+                        name: "April",
+                        data: aprilData
+                    },
+                    {
+                        name: "May",
+                        data: mayData
+                    }
+                ],
+
+                grid: {
+                    row: {
+                        colors: ["transparent", "transparent"],
+                        opacity: 0.2
+                    },
+                    borderColor: "#f1f1f1"
+                },
+
+                markers: {
+                    size: 6
+                },
+
+                xaxis: {
+                    categories: ["Week 1", "Week 2", "Week 3", "Week 4"]
+                },
+
+                yaxis: {
+                    min: 0,
+                    max: 80
+                },
+
+                legend: {
+                    position: "top",
+                    horizontalAlign: "right",
+                    floating: true,
+                    offsetY: -25,
+                    offsetX: -5
+                },
+
+                responsive: [
+                    {
+                        breakpoint: 600,
+                        options: {
+                            chart: {
+                                toolbar: {
+                                    show: false
+                                }
+                            },
+                            legend: {
+                                show: false
+                            }
+                        }
+                    }
+                ]
+            };
+
+            var chart = new ApexCharts(
+                document.querySelector(chartId),
+                options
+            );
+
             chart.render();
-      });
-   </script>
+        }
+
+        // Weddings - Cristian
+        createChart(
+            "#line_chart_datalabel",
+            [26, 24, 32, 36],
+            [14, 11, 16, 12]
+        );
+
+        // Wellness - Marisa T
+        createChart(
+            "#line_chart_datalabel1",
+            [18, 22, 28, 31],
+            [20, 25, 29, 35]
+        );
+
+        // Events - Ernie
+        createChart(
+            "#line_chart_datalabel2",
+            [40, 44, 50, 53],
+            [48, 52, 58, 63]
+        );
+
+        createChart(
+            "#line_chart_datalabel3",
+            [40, 44, 50, 53],
+            [48, 52, 58, 63]
+        );
+
+        createChart(
+            "#line_chart_datalabel4",
+            [40, 44, 50, 53],
+            [48, 52, 58, 63]
+        );
+
+        createChart(
+            "#line_chart_datalabel5",
+            [40, 44, 50, 53],
+            [48, 52, 58, 63]
+        );
+
+        createChart(
+            "#line_chart_datalabel6",
+            [40, 44, 50, 53],
+            [48, 52, 58, 63]
+        );
+
+        createChart(
+            "#line_chart_datalabel7",
+            [40, 44, 50, 53],
+            [48, 52, 58, 63]
+        );
+
+    });
+    </script>
 @endsection
