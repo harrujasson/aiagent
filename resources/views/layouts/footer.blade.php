@@ -107,6 +107,31 @@
                     >
                         Report for Two week?
                     </button>
+                    <button
+                        class="pre_query inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border bg-transparent shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 border-border dark:hover:bg-input/50 h-8 rounded-md px-3 text-xs"
+                    >
+                        How many leads last two week?
+                    </button>
+                    <button
+                        class="pre_query inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border bg-transparent shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 border-border dark:hover:bg-input/50 h-8 rounded-md px-3 text-xs"
+                    >
+                        Report for last week?
+                    </button>
+                    <button
+                        class="pre_query inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border bg-transparent shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 border-border dark:hover:bg-input/50 h-8 rounded-md px-3 text-xs"
+                    >
+                        Report for this week?
+                    </button>
+                    <button
+                        class="pre_query inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border bg-transparent shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 border-border dark:hover:bg-input/50 h-8 rounded-md px-3 text-xs"
+                    >
+                        Report for Today week?
+                    </button>
+                    <button
+                        class="pre_query inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border bg-transparent shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 border-border dark:hover:bg-input/50 h-8 rounded-md px-3 text-xs"
+                    >
+                        Report for Yes week?
+                    </button>
 
                 </div>
 
